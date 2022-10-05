@@ -27,11 +27,11 @@ class Handler extends S3Handler
         ];
 
         $this->database = [
-            'host' => 'aws-aurora-80-clustor.cluster-chiqs2xwc447.eu-west-1.rds.amazonaws.com',
+            'host' => '{host-url}',
             'port' => 3306,
             'name' => 'cs2',
-            'username' => 'admin',
-            'password' => '$dxNLJx80Q58'
+            'username' => '{username}',
+            'password' => '{password}'
         ];
 
         $this->s3Client = new Aws\S3\S3Client($this->conf);
@@ -298,7 +298,7 @@ class Handler extends S3Handler
             $this->database['password']
         );
 
-        $stmt = $pdo->prepare("UPDATE MediaFile SET image_meta=:image_meta WHERE location='$location'");
+        $stmt = $pdo->prepare("UPDATE {table} SET image_meta=:image_meta WHERE id='$location'");
 
         $stmt->execute([
             ':image_meta' => json_encode($data)
