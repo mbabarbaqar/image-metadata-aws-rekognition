@@ -1,0 +1,21 @@
+{
+    "name": "clipsource/cs-image-meta",
+    "description": "Tag images uploaded through S3, with AWS Rekognition",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Clipsource\\TagImageLambda\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Company",
+            "email": "Email"
+        }
+    ],
+    "require": {
+        "bref/bref": "^1.6",
+        "aws/aws-sdk-php": "^3.228",
+        "bref/extra-php-extensions": "^0.11.34"
+    }
+}

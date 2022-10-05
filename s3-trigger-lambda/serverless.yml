@@ -1,0 +1,46 @@
+service: imagemeta-s3
+
+custom:
+    bucket: {bucket-name}
+
+provider:
+    name: aws
+    region: eu-west-1
+    runtime: provided.al2
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - s3:*
+          Resource: "*"
+
+plugins:
+    - ./vendor/bref/bref
+    - ./vendor/bref/extra-php-extensions
+
+configValidationMode: error
+
+functions:
+    imageMeta:
+        handler: src/index.php
+        description: ''
+        layers:
+            - ${bref:layer.php-81}
+            - ${bref-extra:imagick-php-81}
+        events:
+          - s3:
+              bucket: ${self:custom.bucket}
+              event: s3:ObjectCreated:*
+              rules:
+                - prefix: images-folder/
+              existing: true
+        #vpc:
+          #securityGroupIds:
+          #  - sg-{randon}
+          #subnetIds:
+          #  - subnet-{randon}
+          #  - subnet-{randon}
+
+# Exclude files from deployment
+package:
+    patterns:
+        - '!tests/**'
