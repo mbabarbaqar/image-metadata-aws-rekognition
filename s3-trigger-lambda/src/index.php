@@ -29,7 +29,7 @@ class Handler extends S3Handler
         $this->database = [
             'host' => '{host-url}',
             'port' => 3306,
-            'name' => 'cs2',
+            'name' => '{database}',
             'username' => '{username}',
             'password' => '{password}'
         ];
