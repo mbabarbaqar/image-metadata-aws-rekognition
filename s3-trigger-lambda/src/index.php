@@ -21,11 +21,9 @@ class Handler extends S3Handler
     private bool $convertImage;
 
     public function __construct(){
-        $credentials = new Aws\Credentials\Credentials("AKIAXJX75T3IH2FPHN27", "A/z9XVQYYVu5ySHO7wU7gVCEcc8CqK5GPMudECcg");
         $this->conf = [
             "version" => "latest",
-            "region" => "eu-west-1",
-            "credentials" => $credentials
+            "region" => "eu-west-1"
         ];
 
         $this->database = [
