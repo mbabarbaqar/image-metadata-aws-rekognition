@@ -7,13 +7,13 @@ error_reporting(E_ALL);
 
 
 //--------------------------- image conversion --------------------------
-$bucketName = "cwsassets-test";
-$objectName = "media.bank.works/Black.tiff";
+$bucketName = "{bucket}";
+$objectName = "{key}";
 
-$credentials = new Aws\Credentials\Credentials("AKIAXJX75T3IH2FPHN27", "A/z9XVQYYVu5ySHO7wU7gVCEcc8CqK5GPMudECcg");
+$credentials = new Aws\Credentials\Credentials("{key}", "{secret}");
 
 
-$client = new Aws\S3\S3Client([ 'region' => 'eu-west-1', 'version' => 'latest', "credentials" => $credentials]);
+$client = new Aws\S3\S3Client([ 'region' => '{region}', 'version' => 'latest', "credentials" => $credentials]);
 // Register the stream wrapper from an S3Client object
 $client->registerStreamWrapper();
 
@@ -104,18 +104,12 @@ if (isset($_GET['test']) && $_GET['test'] == 4) {
 
 // ------------------ MySQL Connection using pdo-mysql
 if (isset($_GET['test']) && $_GET['test'] == 5) {
-    //Local server
-    //$pdo = new PDO(
-    //    'mysql:host=mysql;port=3306;dbname=cs2',
-    //    'cs2',
-    //    '65432'
-    //);
 
     //Test Server
     $pdo = new PDO(
-        'mysql:host=aws-aurora-80-clustor.cluster-chiqs2xwc447.eu-west-1.rds.amazonaws.com;port=3306;dbname=cs2',
-        'admin',
-        '$dxNLJx80Q58'
+        '{host}',
+        '{username}',
+        '{password}'
     );
 
     $stmt = $pdo->prepare("SELECT count(*) FROM User");
@@ -133,7 +127,7 @@ if (isset($_GET['test']) && $_GET['test'] == 5) {
 
 //------------------------- MySQL connection using mysqli php
 if (isset($_GET['test']) && $_GET['test'] == 6) {
-    $mysqli = new mysqli('mysql', 'cs2', '65432', 'cs2', '3306');
+    $mysqli = new mysqli('mysql', '{username}', '{password}', '{databse}', '3306');
 
     // Check connection
     if ($mysqli->connect_errno) {
