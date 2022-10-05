@@ -1,4 +1,4 @@
-service: imagemeta-s3
+service: imagemeta-aws-rekognition-s3
 
 custom:
     bucket: {bucket-name}
